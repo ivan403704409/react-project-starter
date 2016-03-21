@@ -4,7 +4,7 @@ let Hello = React.createClass({
     render() {
         return (
             <div className="edf">
-                hello
+                mervyn, haha
             </div>
         );
     }
