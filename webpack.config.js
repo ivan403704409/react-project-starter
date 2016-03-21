@@ -18,7 +18,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx', '.json']
     },
-
+    watch: true,
     plugins: [
         new webpack.NoErrorsPlugin()
     ]
