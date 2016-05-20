@@ -75,3 +75,11 @@ node_modules/
 .npm/
 npm-debug.log
 .sass-cache/
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore
+
+*.keystore
