@@ -4,7 +4,7 @@ let Hello = React.createClass({
     render() {
         return (
             <div className="edf">
-                mervyn, hahamiaofjadslk
+                mervyn update to 15.2.1
             </div>
         );
     }
