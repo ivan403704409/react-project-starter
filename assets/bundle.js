@@ -84,11 +84,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_reactRouter.Router, { history: history, routes: _routes2.default })
-	  )
+	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routes2.default })
 	), app);
 
 /***/ },
@@ -29155,7 +29151,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var initialState = { text: 0 };
+	var initialState = { text: 100 };
 
 	exports.default = function () {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
@@ -29163,13 +29159,14 @@
 
 	  switch (action.type) {
 	    case 'ADD_ONE':
+	      console.log(state.text);
 	      return {
-	        text: state + action.text
+	        text: state.text + action.text
 	      };
 	      break;
 	    case 'ADD_TWO':
 	      return {
-	        text: state + 2
+	        text: state.text + 2
 	      };
 	      break;
 	    default:
@@ -29299,7 +29296,8 @@
 	;
 
 	var mapStateToProps = function mapStateToProps(state) {
-	  return { text: state.text };
+	  console.log(state);
+	  return { text: state.other.text };
 	};
 
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {

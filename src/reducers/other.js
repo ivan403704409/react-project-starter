@@ -1,15 +1,16 @@
-const initialState = {text: 0};
+const initialState = {text: 100};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_ONE':
+    console.log(state.text);
       return {
-        text: state + action.text,
+        text: state.text + action.text,
       }
       break;
     case 'ADD_TWO':
       return {
-        text: state + 2,
+        text: state.text + 2,
       }
       break;
     default:

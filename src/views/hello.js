@@ -25,7 +25,8 @@ class Hello extends React.Component{
 };
 
 const mapStateToProps = (state) => {
-  return { text: state.text };
+  console.log(state);
+  return { text: state.other.text};
 };
 
 const mapDispatchToProps = (dispatch) => {
