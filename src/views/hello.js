@@ -24,8 +24,7 @@ class Hello extends React.Component{
   }
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
+const mapStateToProps = (state, ownProps) => {
   return { text: state.other.text};
 };
 

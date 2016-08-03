@@ -29294,8 +29294,7 @@
 
 	;
 
-	var mapStateToProps = function mapStateToProps(state) {
-	  console.log(state);
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return { text: state.other.text };
 	};
 
