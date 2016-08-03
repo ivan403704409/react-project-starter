@@ -3,7 +3,6 @@ const initialState = {text: 100};
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_ONE':
-    console.log(state.text);
       return {
         text: state.text + action.text,
       }

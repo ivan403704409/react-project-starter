@@ -29159,7 +29159,6 @@
 
 	  switch (action.type) {
 	    case 'ADD_ONE':
-	      console.log(state.text);
 	      return {
 	        text: state.text + action.text
 	      };
@@ -29419,7 +29418,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'React Router Tutorial'
+	          'React Kentucky'
 	        ),
 	        _react2.default.createElement(
 	          'ul',
