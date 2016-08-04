@@ -4,7 +4,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "./src/index"
+    "./src/index.js"
   ],
   output: {
     path: './assets',
@@ -22,7 +22,8 @@ module.exports = {
     }
   },
   watch: true,
+  devtool: 'source-map',
   plugins: [
-    new webpack.NoErrorsPlugin()
+    // new webpack.NoErrorsPlugin()
   ]
 };
