@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
-class Hello extends React.Component{
+class Hello extends Component{
   render() {
     const { text, addOne, addTwo } = this.props;
     return (
       <div>
         <div className="edf">
-          mervyn update to 15.2.1 {text}
+          mervyn update to 15.3.0 {text}
         </div>
         
         <button onClick={ (e) => {
