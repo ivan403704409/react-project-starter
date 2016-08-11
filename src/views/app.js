@@ -10,10 +10,6 @@ export default class App extends Component{
           <li><Link to={'/hello'}>HELLO</Link></li>
           <li><Link to={'/hi'}>HI</Link></li>
         </ul>
-        
-        {
-          this.props.children
-        }
       </div>
     );
   }

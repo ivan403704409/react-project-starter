@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import * as actions from '../actions';
 
-class Hello extends Component{
+class Hello extends Component {
   render() {
-    const { text, addOne, addTwo } = this.props;
+    const { text, route, addOne, addTwo } = this.props;
+    console.log(route);
     return (
       <div>
         <div className="edf">
@@ -19,13 +21,19 @@ class Hello extends Component{
         <button onClick={ (e) => {
           addTwo()
         }}>加2</button>
+        
+      <Link to={'/hi'}><div>HI</div></Link>
+        <Link to={'/'}><div>App</div></Link>
       </div>
     );
   }
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return { text: state.other.text};
+  return {
+    text: state.other.text,
+    route: ownProps.location,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

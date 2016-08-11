@@ -6,9 +6,9 @@ import Hi from '../views/hi';
 import App from '../views/app';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={Hello}/>
+  <Route path="/">
+    <IndexRoute component={App}/>
     <Route path="/hello" component={Hello}/>
-    <Route path="/hi" component={Hi}/>
+    <Route path="/hi" component={Hi}/>  
   </Route>
 );

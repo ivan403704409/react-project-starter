@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -25,5 +26,15 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     // new webpack.NoErrorsPlugin()
+    new HtmlWebpackPlugin({
+      title: 'React React-router Redux Webpack App',
+      filename: 'index.html',
+      template: './src/index.html',
+      inject: 'body',
+      minify: {
+          // collapseWhitespace: true,
+          removeComments: true,
+      },
+    }),
   ]
 };

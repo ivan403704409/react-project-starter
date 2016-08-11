@@ -65,13 +65,13 @@
 	
 	var _reactRedux = __webpack_require__(239);
 	
-	var _reactRouterRedux = __webpack_require__(265);
+	var _reactRouterRedux = __webpack_require__(260);
 	
-	var _configureStore = __webpack_require__(270);
+	var _configureStore = __webpack_require__(265);
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
-	var _routes = __webpack_require__(273);
+	var _routes = __webpack_require__(268);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
@@ -224,17 +224,45 @@
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
 	        return setTimeout(fun, 0);
-	    } else {
-	        return cachedSetTimeout.call(null, fun, 0);
 	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+	
+	
 	}
 	function runClearTimeout(marker) {
 	    if (cachedClearTimeout === clearTimeout) {
-	        clearTimeout(marker);
-	    } else {
-	        cachedClearTimeout.call(null, marker);
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
 	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+	
+	
+	
 	}
 	var queue = [];
 	var draining = false;
@@ -27263,7 +27291,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(260);
+	var _isPlainObject = __webpack_require__(248);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
@@ -28025,7 +28053,7 @@
 	
 	/**
 	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
 	 * of values.
 	 */
 	var objectToString = objectProto.toString;
@@ -28039,8 +28067,7 @@
 	 * @since 0.8.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object,
-	 *  else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
 	 * @example
 	 *
 	 * function Foo() {
@@ -28082,17 +28109,8 @@
 
 	var overArg = __webpack_require__(250);
 	
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeGetPrototype = Object.getPrototypeOf;
-	
-	/**
-	 * Gets the `[[Prototype]]` of `value`.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {null|Object} Returns the `[[Prototype]]`.
-	 */
-	var getPrototype = overArg(nativeGetPrototype, Object);
+	/** Built-in value references. */
+	var getPrototype = overArg(Object.getPrototypeOf, Object);
 	
 	module.exports = getPrototype;
 
@@ -28102,7 +28120,7 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Creates a function that invokes `func` with its first argument transformed.
+	 * Creates a unary function that invokes `func` with its argument transformed.
 	 *
 	 * @private
 	 * @param {Function} func The function to wrap.
@@ -28546,185 +28564,6 @@
 /* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(261),
-	    isHostObject = __webpack_require__(263),
-	    isObjectLike = __webpack_require__(264);
-	
-	/** `Object#toString` result references. */
-	var objectTag = '[object Object]';
-	
-	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
-	
-	/** Used to resolve the decompiled source of functions. */
-	var funcToString = Function.prototype.toString;
-	
-	/** Used to check objects for own properties. */
-	var hasOwnProperty = objectProto.hasOwnProperty;
-	
-	/** Used to infer the `Object` constructor. */
-	var objectCtorString = funcToString.call(Object);
-	
-	/**
-	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
-	 * of values.
-	 */
-	var objectToString = objectProto.toString;
-	
-	/**
-	 * Checks if `value` is a plain object, that is, an object created by the
-	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 0.8.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object,
-	 *  else `false`.
-	 * @example
-	 *
-	 * function Foo() {
-	 *   this.a = 1;
-	 * }
-	 *
-	 * _.isPlainObject(new Foo);
-	 * // => false
-	 *
-	 * _.isPlainObject([1, 2, 3]);
-	 * // => false
-	 *
-	 * _.isPlainObject({ 'x': 0, 'y': 0 });
-	 * // => true
-	 *
-	 * _.isPlainObject(Object.create(null));
-	 * // => true
-	 */
-	function isPlainObject(value) {
-	  if (!isObjectLike(value) ||
-	      objectToString.call(value) != objectTag || isHostObject(value)) {
-	    return false;
-	  }
-	  var proto = getPrototype(value);
-	  if (proto === null) {
-	    return true;
-	  }
-	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-	  return (typeof Ctor == 'function' &&
-	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
-	}
-	
-	module.exports = isPlainObject;
-
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var overArg = __webpack_require__(262);
-	
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeGetPrototype = Object.getPrototypeOf;
-	
-	/**
-	 * Gets the `[[Prototype]]` of `value`.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {null|Object} Returns the `[[Prototype]]`.
-	 */
-	var getPrototype = overArg(nativeGetPrototype, Object);
-	
-	module.exports = getPrototype;
-
-
-/***/ },
-/* 262 */
-/***/ function(module, exports) {
-
-	/**
-	 * Creates a function that invokes `func` with its first argument transformed.
-	 *
-	 * @private
-	 * @param {Function} func The function to wrap.
-	 * @param {Function} transform The argument transform.
-	 * @returns {Function} Returns the new function.
-	 */
-	function overArg(func, transform) {
-	  return function(arg) {
-	    return func(transform(arg));
-	  };
-	}
-	
-	module.exports = overArg;
-
-
-/***/ },
-/* 263 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is a host object in IE < 9.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
-	 */
-	function isHostObject(value) {
-	  // Many host objects are `Object` objects that can coerce to strings
-	  // despite having improperly defined `toString` methods.
-	  var result = false;
-	  if (value != null && typeof value.toString != 'function') {
-	    try {
-	      result = !!(value + '');
-	    } catch (e) {}
-	  }
-	  return result;
-	}
-	
-	module.exports = isHostObject;
-
-
-/***/ },
-/* 264 */
-/***/ function(module, exports) {
-
-	/**
-	 * Checks if `value` is object-like. A value is object-like if it's not `null`
-	 * and has a `typeof` result of "object".
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Lang
-	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
-	 * @example
-	 *
-	 * _.isObjectLike({});
-	 * // => true
-	 *
-	 * _.isObjectLike([1, 2, 3]);
-	 * // => true
-	 *
-	 * _.isObjectLike(_.noop);
-	 * // => false
-	 *
-	 * _.isObjectLike(null);
-	 * // => false
-	 */
-	function isObjectLike(value) {
-	  return !!value && typeof value == 'object';
-	}
-	
-	module.exports = isObjectLike;
-
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -28732,7 +28571,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 	
-	var _reducer = __webpack_require__(266);
+	var _reducer = __webpack_require__(261);
 	
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -28747,7 +28586,7 @@
 	  }
 	});
 	
-	var _actions = __webpack_require__(267);
+	var _actions = __webpack_require__(262);
 	
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -28792,11 +28631,11 @@
 	  }
 	});
 	
-	var _sync = __webpack_require__(268);
+	var _sync = __webpack_require__(263);
 	
 	var _sync2 = _interopRequireDefault(_sync);
 	
-	var _middleware = __webpack_require__(269);
+	var _middleware = __webpack_require__(264);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -28806,7 +28645,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 266 */
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28850,7 +28689,7 @@
 	}
 
 /***/ },
-/* 267 */
+/* 262 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28892,7 +28731,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 268 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28905,7 +28744,7 @@
 	
 	exports['default'] = syncHistoryWithStore;
 	
-	var _reducer = __webpack_require__(266);
+	var _reducer = __webpack_require__(261);
 	
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -29046,7 +28885,7 @@
 	}
 
 /***/ },
-/* 269 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29056,7 +28895,7 @@
 	});
 	exports['default'] = routerMiddleware;
 	
-	var _actions = __webpack_require__(267);
+	var _actions = __webpack_require__(262);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -29084,7 +28923,7 @@
 	}
 
 /***/ },
-/* 270 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29095,7 +28934,7 @@
 	
 	var _redux = __webpack_require__(246);
 	
-	var _reducers = __webpack_require__(271);
+	var _reducers = __webpack_require__(266);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -29116,7 +28955,7 @@
 	};
 
 /***/ },
-/* 271 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29125,11 +28964,11 @@
 	  value: true
 	});
 	
-	var _other = __webpack_require__(272);
+	var _other = __webpack_require__(267);
 	
 	var _other2 = _interopRequireDefault(_other);
 	
-	var _reactRouterRedux = __webpack_require__(265);
+	var _reactRouterRedux = __webpack_require__(260);
 	
 	var _redux = __webpack_require__(246);
 	
@@ -29143,7 +28982,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 272 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29174,7 +29013,7 @@
 	};
 
 /***/ },
-/* 273 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29189,15 +29028,15 @@
 	
 	var _reactRouter = __webpack_require__(176);
 	
-	var _hello = __webpack_require__(274);
+	var _hello = __webpack_require__(269);
 	
 	var _hello2 = _interopRequireDefault(_hello);
 	
-	var _hi = __webpack_require__(276);
+	var _hi = __webpack_require__(271);
 	
 	var _hi2 = _interopRequireDefault(_hi);
 	
-	var _app = __webpack_require__(277);
+	var _app = __webpack_require__(272);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
@@ -29205,14 +29044,14 @@
 	
 	exports.default = _react2.default.createElement(
 	  _reactRouter.Route,
-	  { path: '/', component: _app2.default },
-	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _hello2.default }),
+	  { path: '/' },
+	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _app2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/hello', component: _hello2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '/hi', component: _hi2.default })
 	);
 
 /***/ },
-/* 274 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29231,7 +29070,9 @@
 	
 	var _reactRedux = __webpack_require__(239);
 	
-	var _actions = __webpack_require__(275);
+	var _reactRouter = __webpack_require__(176);
+	
+	var _actions = __webpack_require__(270);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
@@ -29259,9 +29100,11 @@
 	    value: function render() {
 	      var _props = this.props;
 	      var text = _props.text;
+	      var route = _props.route;
 	      var addOne = _props.addOne;
 	      var addTwo = _props.addTwo;
 	
+	      console.log(route);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -29284,6 +29127,24 @@
 	              addTwo();
 	            } },
 	          '加2'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/hi' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'HI'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'App'
+	          )
 	        )
 	      );
 	    }
@@ -29295,7 +29156,10 @@
 	;
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return { text: state.other.text };
+	  return {
+	    text: state.other.text,
+	    route: ownProps.location
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -29305,7 +29169,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Hello);
 
 /***/ },
-/* 275 */
+/* 270 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29324,7 +29188,7 @@
 	}
 
 /***/ },
-/* 276 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29338,6 +29202,8 @@
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(176);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29362,7 +29228,25 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'mervyn hi'
+	        'mervyn hi',
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/hello' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'HELLO'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'App'
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -29374,7 +29258,7 @@
 	;
 
 /***/ },
-/* 277 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29440,8 +29324,7 @@
 	              'HI'
 	            )
 	          )
-	        ),
-	        this.props.children
+	        )
 	      );
 	    }
 	  }]);
