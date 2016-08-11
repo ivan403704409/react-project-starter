@@ -10,7 +10,7 @@
     "react",
     "demo"
   ],
-  "author": "mervynfang",
+  "author": "Mervyn Fang <mervynfang@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
