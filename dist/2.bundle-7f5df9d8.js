@@ -61,7 +61,8 @@ webpackJsonp([2],{
 	          'div',
 	          { className: 'edf' },
 	          'mervyn update to 15.3.0 ',
-	          text
+	          text,
+	          ' add some function and update all'
 	        ),
 	        _react2.default.createElement(
 	          'button',
@@ -141,4 +142,4 @@ webpackJsonp([2],{
 /***/ }
 
 });
-//# sourceMappingURL=2.bundle-f3dc9881.js.map
+//# sourceMappingURL=2.bundle-7f5df9d8.js.map

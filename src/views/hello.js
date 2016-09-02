@@ -12,7 +12,7 @@ class Hello extends Component {
     return (
       <div>
         <div className="edf">
-          mervyn update to 15.3.0 {text}
+          mervyn update to 15.3.0 {text} add some function and update all
         </div>
         
         <button onClick={ (e) => {
