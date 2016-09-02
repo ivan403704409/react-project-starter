@@ -37,6 +37,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  // bind all actions to store
   return bindActionCreators(actions, dispatch)
 }
 
