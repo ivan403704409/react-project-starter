@@ -1,6 +1,6 @@
-webpackJsonp([3],{
+webpackJsonp([2],{
 
-/***/ 269:
+/***/ 267:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15,7 +15,17 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _redux = __webpack_require__(243);
+	
+	var _reactRedux = __webpack_require__(236);
+	
 	var _reactRouter = __webpack_require__(173);
+	
+	var _actions = __webpack_require__(268);
+	
+	var actions = _interopRequireWildcard(_actions);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25,29 +35,55 @@ webpackJsonp([3],{
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Hi = function (_Component) {
-	  _inherits(Hi, _Component);
+	var Hello = function (_Component) {
+	  _inherits(Hello, _Component);
 	
-	  function Hi() {
-	    _classCallCheck(this, Hi);
+	  function Hello() {
+	    _classCallCheck(this, Hello);
 	
-	    return _possibleConstructorReturn(this, (Hi.__proto__ || Object.getPrototypeOf(Hi)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
 	  }
 	
-	  _createClass(Hi, [{
+	  _createClass(Hello, [{
 	    key: 'render',
 	    value: function render() {
+	      var _props = this.props;
+	      var text = _props.text;
+	      var route = _props.route;
+	      var addOne = _props.addOne;
+	      var addTwo = _props.addTwo;
+	
+	      console.log(route);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'mervyn hi',
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'edf' },
+	          'mervyn update to 15.3.0 ',
+	          text
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick(e) {
+	              addOne(1);
+	            } },
+	          '加1'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick(e) {
+	              addTwo();
+	            } },
+	          '加2'
+	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: '/hello' },
+	          { to: '/hi' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            'HELLO'
+	            'HI'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -63,13 +99,46 @@ webpackJsonp([3],{
 	    }
 	  }]);
 	
-	  return Hi;
+	  return Hello;
 	}(_react.Component);
 	
-	exports.default = Hi;
 	;
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return {
+	    text: state.other.text,
+	    route: ownProps.location
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  // bind all actions to store
+	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Hello);
+
+/***/ },
+
+/***/ 268:
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.addOne = addOne;
+	exports.addTwo = addTwo;
+	function addOne(text) {
+	  return { type: 'ADD_ONE', text: text };
+	}
+	
+	function addTwo(text) {
+	  return { type: 'ADD_TWO', text: text };
+	}
 
 /***/ }
 
 });
-//# sourceMappingURL=3.bundle.js.map
+//# sourceMappingURL=2.bundle-f3dc9881.js.map

@@ -8,8 +8,8 @@ module.exports = {
     "./src/index.js"
   ],
   output: {
-    path: './assets',
-    filename: "bundle.js"
+    path: './dist',
+    filename: "bundle-[hash:8].js"
   },
   module: {
     loaders: [
