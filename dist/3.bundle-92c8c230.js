@@ -1,6 +1,6 @@
-webpackJsonp([1],{
+webpackJsonp([3],{
 
-/***/ 266:
+/***/ 269:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25,59 +25,51 @@ webpackJsonp([1],{
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_Component) {
-	  _inherits(App, _Component);
+	var Hi = function (_Component) {
+	  _inherits(Hi, _Component);
 	
-	  function App() {
-	    _classCallCheck(this, App);
+	  function Hi() {
+	    _classCallCheck(this, Hi);
 	
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Hi).apply(this, arguments));
 	  }
 	
-	  _createClass(App, [{
+	  _createClass(Hi, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        'mervyn hi',
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'React Kentucky'
+	          _reactRouter.Link,
+	          { to: '/hello' },
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'HELLO'
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'ul',
-	          { role: 'nav' },
+	          _reactRouter.Link,
+	          { to: '/' },
 	          _react2.default.createElement(
-	            'li',
+	            'div',
 	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/hello' },
-	              'HELLO'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/hi' },
-	              'HI'
-	            )
+	            'App'
 	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return App;
+	  return Hi;
 	}(_react.Component);
 	
-	exports.default = App;
+	exports.default = Hi;
 	;
 
 /***/ }
 
 });
-//# sourceMappingURL=1.bundle-7f5df9d8.js.map
+//# sourceMappingURL=3.bundle-92c8c230.js.map

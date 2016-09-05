@@ -41,7 +41,7 @@ webpackJsonp([2],{
 	  function Hello() {
 	    _classCallCheck(this, Hello);
 	
-	    return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).apply(this, arguments));
 	  }
 	
 	  _createClass(Hello, [{
@@ -142,4 +142,4 @@ webpackJsonp([2],{
 /***/ }
 
 });
-//# sourceMappingURL=2.bundle-7f5df9d8.js.map
+//# sourceMappingURL=2.bundle-92c8c230.js.map
