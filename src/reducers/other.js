@@ -1,4 +1,6 @@
-const initialState = {text: 100};
+const initialState = {
+  text: 100
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
