@@ -1,5 +1,5 @@
 const initialState = {
-  text: 100
+  text: 1
 };
 
 export default (state = initialState, action) => {
